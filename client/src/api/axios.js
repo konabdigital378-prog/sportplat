@@ -15,8 +15,18 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
+function addId(obj) {
+  if (obj && typeof obj === 'object' && !Array.isArray(obj)) {
+    if (obj.id !== undefined && obj._id === undefined) obj._id = obj.id;
+    for (const v of Object.values(obj)) addId(v);
+  } else if (Array.isArray(obj)) {
+    obj.forEach(addId);
+  }
+  return obj;
+}
+
 api.interceptors.response.use(
-  (response) => response,
+  (response) => { addId(response.data); return response; },
   (error) => {
     if (error.response?.status === 401) {
       localStorage.removeItem('token');

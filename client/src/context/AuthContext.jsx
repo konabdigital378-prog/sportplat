@@ -13,7 +13,9 @@ export const AuthProvider = ({ children }) => {
     const token = localStorage.getItem('token');
     const saved = localStorage.getItem('user');
     if (token && saved) {
-      setUser(JSON.parse(saved));
+      const u = JSON.parse(saved);
+      if (u.id !== undefined && u._id === undefined) u._id = u.id;
+      setUser(u);
       api.get('/auth/me')
         .then((res) => {
           setUser(res.data);
