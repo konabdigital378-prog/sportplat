@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-sport-black text-white font-body antialiased;
+  }
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: #111; }
+  ::-webkit-scrollbar-thumb { background: #009E49; border-radius: 3px; }
+}
+
+@layer components {
+  .btn-sport {
+    @apply bg-sport-green text-white font-heading font-bold tracking-widest uppercase px-8 py-3 transition-all duration-200 inline-block text-sm;
+    clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+  }
+  .btn-sport:hover {
+    @apply bg-sport-green-light -translate-y-0.5;
+    box-shadow: 0 8px 30px rgba(0,158,73,0.4);
+  }
+  .btn-sport:disabled {
+    @apply opacity-50 cursor-not-allowed transform-none;
+    box-shadow: none;
+  }
+  .btn-outline {
+    @apply bg-transparent text-white font-heading font-semibold tracking-widest uppercase px-6 py-3 text-sm transition-all duration-200 inline-flex items-center gap-2;
+    border: 1px solid rgba(255,255,255,0.3);
+  }
+  .btn-outline:hover {
+    border-color: #009E49;
+    color: #009E49;
+  }
+  .btn-danger-sport {
+    @apply bg-sport-red text-white font-heading font-bold tracking-widest uppercase px-8 py-3 transition-all duration-200 text-sm;
+    clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+  }
+  .btn-danger-sport:hover {
+    @apply bg-red-500 -translate-y-0.5;
+    box-shadow: 0 8px 30px rgba(239,43,45,0.4);
+  }
+  .card-sport {
+    @apply bg-sport-dark border border-sport-green/20 rounded-none p-6;
+  }
+  .card-sport:hover {
+    @apply border-sport-green/40;
+  }
+  .input-sport {
+    @apply w-full bg-sport-black border border-white/10 text-white px-4 py-3 font-body text-sm outline-none transition-colors duration-200;
+  }
+  .input-sport:focus {
+    border-color: #009E49;
+  }
+  .label-sport {
+    @apply block text-xs text-gray-500 uppercase tracking-wider font-semibold mb-1.5;
+  }
+  .badge-green {
+    @apply bg-sport-green/10 text-sport-green border border-sport-green/30 text-xs font-semibold px-3 py-1 uppercase tracking-wider;
+  }
+  .badge-red {
+    @apply bg-sport-red/10 text-sport-red border border-sport-red/30 text-xs font-semibold px-3 py-1 uppercase tracking-wider;
+  }
+  .badge-gold {
+    @apply bg-sport-gold/10 text-sport-gold border border-sport-gold/30 text-xs font-semibold px-3 py-1 uppercase tracking-wider;
+  }
+  .section-tag {
+    @apply flex items-center gap-3 font-heading text-xs font-bold tracking-[4px] uppercase text-sport-green mb-4;
+  }
+  .section-tag::before {
+    content: '';
+    @apply w-8 h-0.5 bg-sport-green;
+  }
+  .heading-xl {
+    @apply font-heading font-black uppercase leading-none;
+  }
+  .glow-green {
+    box-shadow: 0 0 40px rgba(0,158,73,0.3);
+  }
+}

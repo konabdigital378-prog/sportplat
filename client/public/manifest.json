@@ -1,0 +1,19 @@
+{
+  "name": "SPORTPLAT - Tournament Manager",
+  "short_name": "SPORTPLAT",
+  "description": "Gestion de tournois en temps réel",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#080808",
+  "theme_color": "#080808",
+  "orientation": "any",
+  "icons": [
+    { "src": "/logo.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/logo.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ],
+  "lang": "fr-FR",
+  "categories": ["sports", "utilities"],
+  "scope": "/",
+  "prefer_related_applications": false,
+  "related_applications": []
+}
