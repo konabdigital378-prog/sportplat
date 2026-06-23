@@ -50,17 +50,30 @@ router.get('/me', protect, (req, res) => {
 
 router.put('/me', protect, async (req, res) => {
   try {
-    const { username, phone, avatar_url } = req.body;
+    const { username, phone, avatar_url, bio } = req.body;
     const updates = {};
     if (username) updates.username = username;
     if (phone !== undefined) updates.phone = phone;
     if (avatar_url !== undefined) updates.avatar_url = avatar_url;
+    if (bio !== undefined) updates.bio = bio;
 
     const { data, error } = await supabase
       .from('profiles').update(updates).eq('id', req.user.id).select().single();
 
     if (error) return res.status(400).json({ message: error.message });
     res.json(data);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+router.put('/password', protect, async (req, res) => {
+  try {
+    const { currentPassword, newPassword } = req.body;
+    if (!currentPassword || !newPassword) return res.status(400).json({ message: 'Champs requis' });
+    const { error } = await supabase.auth.updateUser({ password: newPassword });
+    if (error) return res.status(400).json({ message: error.message });
+    res.json({ message: 'Mot de passe mis à jour' });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

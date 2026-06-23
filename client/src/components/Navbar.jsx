@@ -30,6 +30,16 @@ export default function Navbar() {
               Dashboard
             </Link>
           )}
+          {user && (
+            <Link to="/settings" className="font-heading font-semibold text-sm tracking-wider uppercase text-gray-400 hover:text-white transition-colors relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:right-0 after:h-0.5 after:bg-sport-green after:scale-x-0 hover:after:scale-x-100 after:transition-transform">
+              Paramètres
+            </Link>
+          )}
+          {user?.role === 'admin' && (
+            <Link to="/admin" className="font-heading font-semibold text-sm tracking-wider uppercase text-sport-red hover:text-white transition-colors relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:right-0 after:h-0.5 after:bg-sport-red after:scale-x-0 hover:after:scale-x-100 after:transition-transform">
+              Admin
+            </Link>
+          )}
           <Link to="/" className="font-heading font-semibold text-sm tracking-wider uppercase text-gray-400 hover:text-white transition-colors relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:right-0 after:h-0.5 after:bg-sport-green after:scale-x-0 hover:after:scale-x-100 after:transition-transform">
             Tournois
           </Link>
@@ -67,6 +77,8 @@ export default function Navbar() {
         <div className="absolute top-20 left-0 right-0 bg-sport-black/98 border-b border-sport-green/20 p-8 flex flex-col gap-4 lg:hidden">
           <Link to="/" className="font-heading font-semibold text-sm tracking-wider uppercase text-white" onClick={() => setMobileOpen(false)}>Accueil</Link>
           {user && <Link to="/dashboard" className="font-heading font-semibold text-sm tracking-wider uppercase text-white" onClick={() => setMobileOpen(false)}>Dashboard</Link>}
+          {user && <Link to="/settings" className="font-heading font-semibold text-sm tracking-wider uppercase text-white" onClick={() => setMobileOpen(false)}>Paramètres</Link>}
+          {user?.role === 'admin' && <Link to="/admin" className="font-heading font-semibold text-sm tracking-wider uppercase text-sport-red" onClick={() => setMobileOpen(false)}>Admin</Link>}
           <Link to="/" className="font-heading font-semibold text-sm tracking-wider uppercase text-white" onClick={() => setMobileOpen(false)}>Tournois</Link>
         </div>
       )}

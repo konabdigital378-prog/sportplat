@@ -146,6 +146,9 @@ export default function TournamentDetail() {
                 <button onClick={handleStart} className="btn-sport text-xs py-2.5 px-6">Démarrer</button>
               )}
               {(isOrganizer || isAdmin) && (
+                <Link to={`/tournament/${id}/edit`} className="btn-outline text-xs py-2.5 px-6">Modifier</Link>
+              )}
+              {(isOrganizer || isAdmin) && (
                 <button onClick={handleDelete} className="btn-danger-sport text-xs py-2.5 px-6">Supprimer</button>
               )}
             </div>

@@ -10,6 +10,9 @@ import TournamentDetail from './pages/TournamentDetail';
 import BracketView from './pages/BracketView';
 import Profile from './pages/Profile';
 import PaymentCallback from './pages/PaymentCallback';
+import Admin from './pages/Admin';
+import Settings from './pages/Settings';
+import EditTournament from './pages/EditTournament';
 
 function PrivateRoute({ children }) {
   const { user, loading } = useAuth();
@@ -36,6 +39,9 @@ export default function App() {
         <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
         <Route path="/profile/:id" element={<Profile />} />
         <Route path="/payment/callback" element={<PaymentCallback />} />
+        <Route path="/admin" element={<PrivateRoute><Admin /></PrivateRoute>} />
+        <Route path="/settings" element={<PrivateRoute><Settings /></PrivateRoute>} />
+        <Route path="/tournament/:id/edit" element={<PrivateRoute><EditTournament /></PrivateRoute>} />
       </Routes>
     </div>
   );

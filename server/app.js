@@ -16,6 +16,8 @@ const seedingRoutes = require('./routes/seeding');
 const paymentRoutes = require('./routes/payments');
 const rolesRoutes = require('./routes/roles');
 const statsRoutes = require('./routes/stats');
+const adminRoutes = require('./routes/admin');
+const teamMembersRoutes = require('./routes/teamMembers');
 
 const app = express();
 
@@ -35,6 +37,8 @@ app.use('/api/seeding', seedingRoutes);
 app.use('/api/payments', paymentRoutes);
 app.use('/api/roles', rolesRoutes);
 app.use('/api/stats', statsRoutes);
+app.use('/api/admin', adminRoutes);
+app.use('/api/team-members', teamMembersRoutes);
 
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
