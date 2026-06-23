@@ -11,19 +11,6 @@ export default function Notifications() {
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
 
-  useEffect(() => { if (user) loadNotifs(); }, [user]);
-  usePolling(loadNotifs, 15000, !!user);
-
-  useEffect(() => {
-    const handleClick = (e) => { if (ref.current && !ref.current.contains(e.target)) setOpen(false); };
-    document.addEventListener('mousedown', handleClick);
-    return () => document.removeEventListener('mousedown', handleClick);
-  }, []);
-
-  useEffect(() => {
-    if (Notification.permission === 'default') Notification.requestPermission();
-  }, []);
-
   const loadNotifs = async () => {
     try {
       const res = await api.get('/notifications');
@@ -47,6 +34,19 @@ export default function Notifications() {
       setUnread(prev => Math.max(0, prev - 1));
     } catch (err) { /* silent */ }
   };
+
+  useEffect(() => { if (user) loadNotifs(); }, [user]);
+  usePolling(loadNotifs, 15000, !!user);
+
+  useEffect(() => {
+    const handleClick = (e) => { if (ref.current && !ref.current.contains(e.target)) setOpen(false); };
+    document.addEventListener('mousedown', handleClick);
+    return () => document.removeEventListener('mousedown', handleClick);
+  }, []);
+
+  useEffect(() => {
+    if (Notification.permission === 'default') Notification.requestPermission();
+  }, []);
 
   return (
     <div className="relative" ref={ref}>
