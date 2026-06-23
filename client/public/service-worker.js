@@ -1,4 +1,4 @@
-const CACHE = 'sportplat-cache-v1';
+const CACHE = 'sportplat-cache-v2';
 const PRECACHE_URLS = ['/', '/index.html', '/manifest.json'];
 
 self.addEventListener('install', (e) => {
