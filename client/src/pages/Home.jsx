@@ -18,7 +18,7 @@ export default function Home() {
       const params = { limit: 12 };
       if (status) params.status = status;
       const res = await api.get('/tournaments', { params });
-      setTournaments(res.data.tournaments);
+      setTournaments(res.data);
     } catch (err) { /* silent */ }
     finally { setLoading(false); }
   };

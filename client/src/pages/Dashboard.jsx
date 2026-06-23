@@ -18,7 +18,8 @@ export default function Dashboard() {
         api.get('/tournaments', { params: { limit: 50 } }),
         api.get(`/users/${user._id}/tournaments`)
       ]);
-      const mine = orgRes.data.tournaments.filter(t => t.organizer?._id === user._id || t.organizer === user._id);
+      const mines = orgRes.data || [];
+      const mine = mines.filter(t => t.organizer?._id === user._id || t.organizer === user._id);
       setMyTournaments(mine);
       setParticipating(partRes.data);
     } catch (err) { /* silent */ }
