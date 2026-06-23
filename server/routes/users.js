@@ -24,4 +24,21 @@ router.get('/:id', async (req, res) => {
   } catch (err) { res.status(500).json({ message: err.message }); }
 });
 
+router.get('/:id/tournaments', async (req, res) => {
+  try {
+    const { data, error } = await supabase
+      .from('teams').select('tournament_id').eq('captain_id', req.params.id);
+    if (error) return res.status(400).json({ message: error.message });
+
+    const ids = data.map(t => t.tournament_id);
+    if (ids.length === 0) return res.json([]);
+
+    const { data: tournaments, error: tError } = await supabase
+      .from('tournaments').select('*, profiles!organizer_id(username, id)')
+      .in('id', ids).order('created_at', { ascending: false });
+    if (tError) return res.status(400).json({ message: tError.message });
+    res.json(tournaments);
+  } catch (err) { res.status(500).json({ message: err.message }); }
+});
+
 module.exports = router;

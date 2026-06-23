@@ -21,7 +21,7 @@ export default function Dashboard() {
       const mines = orgRes.data || [];
       const mine = mines.filter(t => t.organizer?._id === user._id || t.organizer === user._id);
       setMyTournaments(mine);
-      setParticipating(partRes.data);
+      setParticipating(partRes.data || []);
     } catch (err) { /* silent */ }
     finally { setLoading(false); }
   };
