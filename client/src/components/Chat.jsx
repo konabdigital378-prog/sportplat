@@ -10,17 +10,6 @@ export default function Chat({ tournamentId }) {
   const [open, setOpen] = useState(false);
   const messagesEndRef = useRef(null);
 
-  useEffect(() => {
-    if (!tournamentId || !open) return;
-    loadMessages();
-  }, [tournamentId, open]);
-
-  usePolling(loadMessages, 8000, open && !!tournamentId);
-
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
-
   const loadMessages = async () => {
     try {
       const res = await api.get(`/chat/${tournamentId}?limit=50`);
@@ -37,6 +26,17 @@ export default function Chat({ tournamentId }) {
       loadMessages();
     } catch (err) { /* silent */ }
   };
+
+  useEffect(() => {
+    if (!tournamentId || !open) return;
+    loadMessages();
+  }, [tournamentId, open]);
+
+  usePolling(loadMessages, 8000, open && !!tournamentId);
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
 
   return (
     <>
